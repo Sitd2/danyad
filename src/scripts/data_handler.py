@@ -13,12 +13,14 @@ class DataHandlerABS:
         self.random_state = self.config.get('random_state')
         self.label_names = self.config.get('label_names')
         self.feature_num = self.config.get('feature_num')
-        self.feature_num = self.config.get('feature_cat')
+        self.feature_cat = self.config.get('feature_cat')
+        self.all_columns = [*self.feature_cat, *self.feature_num, *self.label_names]
 
         self._src_path = None
         self._data_folder = None
         self._data_path = None
         self._raw_data = None
+        self._data = None
 
     @property
     def src_path(self):
@@ -67,15 +69,14 @@ class DataHandlerABS:
             LOGGER.info(f'Finished loading data')
         return self._raw_data
 
-
-class DataHandler(DataHandlerABS):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._data = None
-
     @property
     def data(self):
         if self._data is None:
             # ToDo
-            self._data = copy.deepcopy(self.raw_data)
+            self._data = copy.deepcopy(self.raw_data)[self.all_columns]
         return self._data
+
+
+class DataHandler(DataHandlerABS):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
