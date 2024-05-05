@@ -1,5 +1,5 @@
 data_handler:
-  label_name:
+  label_names:
     - 'Y'
   feature_num:
     - 'X1'
@@ -18,6 +18,9 @@ data_handler:
     - 'Z5'
     - 'Z6'
     - 'Z8'
+  data_folder:
+    path: 'data'  # .../src/<data_folder> (if abs path del next row or change "is_relative: False")
+    is_relative: True
+  data_file_name: 'data.csv'
 experiment:
   score: 'neg_mean_squared_error'
-
