@@ -54,7 +54,6 @@ class DataHandlerABS:
         elif suffix == '.xlsx':
             data = pd.read_excel(data_path)
         else:
-            data = None
             text = f'Could not read this file with suffix "{suffix}" choose from [".csv", ".pickle", ".xlsx"]'
             LOGGER.exception(f'File suffix error {suffix}')
             raise ValueError(text)
