@@ -69,7 +69,14 @@ class DataHandlerABS:
         return self._raw_data
 
 
+class DataHandler(DataHandlerABS):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._data = None
 
-
-
-
+    @property
+    def data(self):
+        if self._data is None:
+            # ToDo
+            self._data = copy.deepcopy(self.raw_data)
+        return self._data
